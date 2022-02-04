@@ -38,7 +38,7 @@ brightGreen = (0,255,0)
 
 def mainLoop():
     gameDisplay = pygame.display.set_mode((displayWidth, displayHeight))
-    intentFont = pygame.font.SysFont('Calibri', 32, bold=True)
+    intentFont = pygame.font.SysFont('Calibri', 72, bold=True)
     mainSurface = pygame.Surface(surfDim)
     pygame.display.set_caption("Intentions")
     gameExit = False
@@ -52,6 +52,7 @@ def mainLoop():
     namePos = (posWid, namePosHei)
     numPos = (posWid, numPosHei)                
     addrPos = (posWid, addrPosHei)
+    
     while not gameExit:
 
         gameDisplay.fill(white)
@@ -77,10 +78,10 @@ def mainLoop():
                         screenInfo = pygame.display.Info()
                         screenWid = screenInfo.current_w
                         screenHei = screenInfo.current_h
-                        namePosHei = screenHei / 2
-                        numPosHei = namePosHei + 25
-                        addrPosHei = numPosHei + 25
-                        posWid = (screenWid / 2) - 155
+                        namePosHei = (screenHei / 2) - 20
+                        numPosHei = namePosHei + 50
+                        addrPosHei = numPosHei + 50
+                        posWid = (screenWid / 2) - 175
                         namePos = (posWid, namePosHei)
                         numPos = (posWid, numPosHei)                
                         addrPos = (posWid, addrPosHei)
@@ -89,7 +90,7 @@ def mainLoop():
                         gameDisplay = pygame.display.set_mode((displayWidth, displayHeight))
                         gameDisplay.fill(white)
        
-            pygame.draw.rect(gameDisplay, white, pygame.Rect(posWid,namePosHei,1000,90))
+            pygame.draw.rect(gameDisplay, white, pygame.Rect(posWid,namePosHei,1000,1000))
 
             gameDisplay.blit(nameCache, namePos)
             gameDisplay.blit(numCache, numPos)
