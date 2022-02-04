@@ -42,42 +42,55 @@ def mainLoop():
     mainSurface = pygame.Surface(surfDim)
     pygame.display.set_caption("Intentions")
     gameExit = False
+    halfWid = displayWidth / 2
+    halfHei = displayHeight / 2
+    posWid = halfWid - 100
+    namePosHei = halfHei - 20
+    numPosHei = namePosHei + 25
+    addrPosHei = numPosHei + 25
+    topCor = (0,0)
+    namePos = (posWid, namePosHei)
+    numPos = (posWid, numPosHei)                
+    addrPos = (posWid, addrPosHei)
     while not gameExit:
 
         gameDisplay.fill(white)
         
-    
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE  :
-                    pygame.quit()
-                    quit()
-                if event.key == pygame.K_SPACE:
-                    gameDisplay.fill(white)
-                    gameDisplay = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
-                if event.key == pygame.K_DOWN:
-                    gameDisplay.fill(white)
-                    gameDisplay = pygame.display.set_mode((displayWidth, displayHeight))
-       
+
+        
         for i in myCsvData:
-            pygame.draw.rect(gameDisplay, white, pygame.Rect(270,270,1000,90))
             dataToString = str(i)
             nameCache = intentFont.render(i[0], False, black)
             numCache = intentFont.render(i[1], False, black)
             addrCache = intentFont.render(i[2], False, black)
-            halfWid = displayWidth / 2
-            halfHei = displayHeight / 2
-            posWid = halfWid - 100
-            namePosHei = halfHei - 20
-            numPosHei = namePosHei + 25
-            addrPosHei = numPosHei + 25
-            topCor = (0,0)
-            namePos = (posWid, namePosHei)
-            numPos = (posWid, numPosHei)                
-            addrPos = (posWid, addrPosHei)
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE  :
+                        pygame.quit()
+                        quit()
+                    if event.key == pygame.K_SPACE:
+                        gameDisplay = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+                        screenInfo = pygame.display.Info()
+                        screenWid = screenInfo.current_w
+                        screenHei = screenInfo.current_h
+                        namePosHei = screenHei / 2
+                        numPosHei = namePosHei + 25
+                        addrPosHei = numPosHei + 25
+                        posWid = (screenWid / 2) - 155
+                        namePos = (posWid, namePosHei)
+                        numPos = (posWid, numPosHei)                
+                        addrPos = (posWid, addrPosHei)
+                        gameDisplay.fill(white)
+                    if event.key == pygame.K_DOWN:
+                        gameDisplay = pygame.display.set_mode((displayWidth, displayHeight))
+                        gameDisplay.fill(white)
+       
+            pygame.draw.rect(gameDisplay, white, pygame.Rect(posWid,namePosHei,1000,90))
+
             gameDisplay.blit(nameCache, namePos)
             gameDisplay.blit(numCache, numPos)
             gameDisplay.blit(addrCache, addrPos)
