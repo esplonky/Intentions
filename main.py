@@ -1,12 +1,14 @@
 import time
+import os
+import tkinter as tk
 from tkinter import *
 from turtle import Screen, width
 from unicodedata import name
 import pygame
 import csv
 from pygame.locals import *
-
-    
+ 
+ 
 def importCsv(fileName):
     file = open(fileName)
     csvData = csv.reader(file)
@@ -21,8 +23,6 @@ def importCsv(fileName):
 myCsvData = importCsv('test.csv')
 print(myCsvData)
 
-pygame.init()
-pygame.font.init()
 
 displayWidth = 800
 displayHeight = 600
@@ -35,6 +35,19 @@ red = (200,0,0)
 green = (0,200,0)
 brightRed = (255,0,0)
 brightGreen = (0,255,0)
+
+
+root = tk.Tk()
+embed = tk.Frame(root, width = displayWidth, height = displayHeight)
+embed.grid(columnspan = (displayHeight), rowspan = (displayWidth))
+embed.pack(side = LEFT)
+buttonwin = tk.Frame(root, width = displayWidth, height = displayHeight)
+buttonwin.pack(side = LEFT)
+os.environ['SDL_WINDOWID'] = str(embed.winfo_id())
+os.environ['SDL_VIDEODRIVER'] = 'windib'
+pygame.init()
+pygame.font.init()
+
 
 def mainLoop():
     gameDisplay = pygame.display.set_mode((displayWidth, displayHeight))
@@ -53,10 +66,8 @@ def mainLoop():
     numPos = (posWid, numPosHei)                
     addrPos = (posWid, addrPosHei)
     while not gameExit:
-
+        root.update()
         gameDisplay.fill(white)
-        
-
         
         for i in myCsvData:
             dataToString = str(i)
@@ -96,5 +107,5 @@ def mainLoop():
             gameDisplay.blit(addrCache, addrPos)
             pygame.display.flip()
             time.sleep(2)
-              
+        root.update()
 mainLoop()
