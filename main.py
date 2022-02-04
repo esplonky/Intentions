@@ -6,15 +6,6 @@ import pygame
 import csv
 from pygame.locals import *
 
-master = Tk()
-master.geometry("200x200")
-
-def openNewWindow():
-    newWindow = Toplevel(master)
-    newWindow.title("Preferences")
-    newWindow.geometry("200x200")
-    label = Label(newWindow, "Preferences!").pack()
-    label.pack(pady = 10)
     
 def importCsv(fileName):
     file = open(fileName)
