@@ -35,23 +35,17 @@ red = (200,0,0)
 green = (0,200,0)
 brightRed = (255,0,0)
 brightGreen = (0,255,0)
-
-
-root = tk.Tk()
-embed = tk.Frame(root, width = displayWidth, height = displayHeight)
-embed.grid(columnspan = (displayHeight), rowspan = (displayWidth))
-embed.pack(side = LEFT)
-buttonwin = tk.Frame(root, width = displayWidth, height = displayHeight)
-buttonwin.pack(side = LEFT)
-os.environ['SDL_WINDOWID'] = str(embed.winfo_id())
-os.environ['SDL_VIDEODRIVER'] = 'windib'
 pygame.init()
 pygame.font.init()
+
+def quit_callback():
+  global Done
+  Done = True
 
 
 def mainLoop():
     gameDisplay = pygame.display.set_mode((displayWidth, displayHeight))
-    intentFont = pygame.font.SysFont('Calibri', 32, bold=True)
+    intentFont = pygame.font.SysFont('Calibri', 14, bold=True)
     mainSurface = pygame.Surface(surfDim)
     pygame.display.set_caption("Intentions")
     gameExit = False
@@ -65,8 +59,13 @@ def mainLoop():
     namePos = (posWid, namePosHei)
     numPos = (posWid, numPosHei)                
     addrPos = (posWid, addrPosHei)
+    
+
+
+    
+    
     while not gameExit:
-        root.update()
+        
         gameDisplay.fill(white)
         
         for i in myCsvData:
@@ -99,7 +98,12 @@ def mainLoop():
                     if event.key == pygame.K_DOWN:
                         gameDisplay = pygame.display.set_mode((displayWidth, displayHeight))
                         gameDisplay.fill(white)
-       
+                    if event.key == pygame.K_p:
+                            root = tk.Tk()
+                            root.protocol("WM_DELETE_WINDOW", quit_callback)
+                            main_dialog = tk.Frame(root)
+                            main_dialog.pack()
+                            root.update()
             pygame.draw.rect(gameDisplay, white, pygame.Rect(posWid,namePosHei,1000,90))
 
             gameDisplay.blit(nameCache, namePos)
