@@ -18,7 +18,7 @@ def importCsv(fileName):
     file.close()
     return rows
 
-myCsvData = importCsv('test.csv')
+myCsvData = importCsv('test3.csv')
 print(myCsvData)
 
 pygame.init()
@@ -56,28 +56,25 @@ def mainLoop():
     while not gameExit:
 
         gameDisplay.fill(white)
-        
-
-        
+                
         for i in myCsvData:
             dataToString = str(i)
             nameCache = intentFont.render(i[0], False, black)
             numCache = intentFont.render(i[1], False, black)
             addrCache = intentFont.render(i[2], False, black)
-
+            screenInfo = pygame.display.Info()
+            screenWid = screenInfo.current_w
+            screenHei = screenInfo.current_h
+            
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     quit()
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE  :
+                    if event.key == pygame.K_ESCAPE:
                         pygame.quit()
                         quit()
                     if event.key == pygame.K_SPACE:
-                        gameDisplay = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
-                        screenInfo = pygame.display.Info()
-                        screenWid = screenInfo.current_w
-                        screenHei = screenInfo.current_h
                         namePosHei = (screenHei / 2) - 20
                         numPosHei = namePosHei + 50
                         addrPosHei = numPosHei + 50
@@ -85,13 +82,13 @@ def mainLoop():
                         namePos = (posWid, namePosHei)
                         numPos = (posWid, numPosHei)                
                         addrPos = (posWid, addrPosHei)
+                        gameDisplay = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
                         gameDisplay.fill(white)
                     if event.key == pygame.K_DOWN:
                         gameDisplay = pygame.display.set_mode((displayWidth, displayHeight))
                         gameDisplay.fill(white)
        
-            pygame.draw.rect(gameDisplay, white, pygame.Rect(posWid,namePosHei,1000,1000))
-
+            pygame.draw.rect(gameDisplay, white, pygame.Rect(posWid,namePosHei,1000,1000))        
             gameDisplay.blit(nameCache, namePos)
             gameDisplay.blit(numCache, numPos)
             gameDisplay.blit(addrCache, addrPos)
