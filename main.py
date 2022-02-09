@@ -7,6 +7,10 @@ from unicodedata import name
 import pygame
 import csv
 from pygame.locals import *
+import pygame_gui
+
+mainClock = pygame.time.Clock()
+
 
 # Init code for Tkinter 
 class App:
@@ -43,7 +47,9 @@ def importCsv(fileName):
 
 #Import and Print contents of 'test.csv'
 myCsvData = importCsv('test.csv')
-print(myCsvData)
+#print(myCsvData)
+timeFormula = len(myCsvData)/30
+print(timeFormula)
 
 #Initialize display parameters and colors
 displayWidth = 800
@@ -61,7 +67,6 @@ topCor = (0,0)
 namePos = (posWid, namePosHei)
 numPos = (posWid, numPosHei)                
 addrPos = (posWid, addrPosHei)
-    
 fontPadding = 25
 black = (0,0,0)
 white = (255,255,255)
@@ -91,6 +96,16 @@ def mainLoop():
     #Main Pygame Loop#
     ##################
     while not gameExit:
+        screenInfo = pygame.display.Info()
+        screenWid = screenInfo.current_w
+        screenHei = screenInfo.current_h
+        namePosHei = screenHei / 2
+        numPosHei = namePosHei + 25
+        addrPosHei = numPosHei + 25
+        posWid = (screenWid / 2) - 155
+        namePos = (posWid, namePosHei)
+        numPos = (posWid, numPosHei)                
+        addrPos = (posWid, addrPosHei)
         #Fill the background with white
         gameDisplay.fill(white)
         #For each piece of data in myCsvData
@@ -137,12 +152,7 @@ def mainLoop():
                     if event.key == pygame.K_DOWN:
                         gameDisplay = pygame.display.set_mode((displayWidth, displayHeight))
                         gameDisplay.fill(white)
-                    if event.key == pygame.K_p:
-                            root = tk.Tk()
-                            root.protocol("WM_DELETE_WINDOW", quit_callback)
-                            main_dialog = tk.Frame(root)
-                            main_dialog.pack()
-                            root.update()
+
             #Draws a white rectangle where the name goes
             pygame.draw.rect(gameDisplay, white, pygame.Rect(posWid,namePosHei,1000,90))
             #Display the text on screen
@@ -152,7 +162,5 @@ def mainLoop():
             #Draw Screen
             pygame.display.flip()
             #wait for 2 seconds
-            time.sleep(2)
-        #update Tk Window
-        root.update()
+            time.sleep(timeFormula)
 mainLoop()
