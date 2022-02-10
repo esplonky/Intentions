@@ -8,7 +8,7 @@ import pygame
 import csv
 from pygame.locals import *
 import pygame_gui
-
+import CONFIG
 mainClock = pygame.time.Clock()
 prefsFile = open("CONFIG.py")
 
@@ -87,7 +87,7 @@ def quit_callback():
 def mainLoop():
     #Setting up our display and initializing our font styles
     gameDisplay = pygame.display.set_mode((displayWidth, displayHeight))
-    intentFont = pygame.font.SysFont(CONFIG.FONT, 14, bold=True)
+    intentFont = pygame.font.SysFont(CONFIG.FONT, 34, bold=True)
     mainSurface = pygame.Surface(surfDim)
     pygame.display.set_caption("Intentions")
     gameExit = False

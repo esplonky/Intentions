@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface version="1.2">
+  <object class="tk.Toplevel" id="toplevel1">
+    <property name="height">600</property>
+    <property name="width">800</property>
+    <child>
+      <object class="ttk.Entry" id="fieldCsvLocation">
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="row">1</property>
+          <property name="sticky">nw</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Button" id="buttonBrowse">
+        <property name="text" translatable="yes">Browse...</property>
+        <layout manager="grid">
+          <property name="column">1</property>
+          <property name="row">1</property>
+          <property name="sticky">nw</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Button" id="buttonSave">
+        <property name="command" type="command" cbtype="simple">saveSettings</property>
+        <property name="text" translatable="yes">Apply</property>
+        <layout manager="grid">
+          <property name="column">1</property>
+          <property name="row">2</property>
+          <property name="sticky">nw</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Button" id="button3">
+        <property name="command" type="command" cbtype="simple">mainLoop</property>
+        <property name="text" translatable="yes">Launch</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="row">2</property>
+          <property name="sticky">nw</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Combobox" id="combobox1">
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Combobox" id="combobox2">
+        <layout manager="grid">
+          <property name="column">1</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+</interface>
