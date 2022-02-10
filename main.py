@@ -10,7 +10,7 @@ from pygame.locals import *
 import pygame_gui
 
 mainClock = pygame.time.Clock()
-
+prefsFile = open("CONFIG.py")
 
 # Init code for Tkinter 
 class App:
@@ -87,7 +87,7 @@ def quit_callback():
 def mainLoop():
     #Setting up our display and initializing our font styles
     gameDisplay = pygame.display.set_mode((displayWidth, displayHeight))
-    intentFont = pygame.font.SysFont('Calibri', 14, bold=True)
+    intentFont = pygame.font.SysFont(CONFIG.FONT, 14, bold=True)
     mainSurface = pygame.Surface(surfDim)
     pygame.display.set_caption("Intentions")
     gameExit = False
@@ -163,4 +163,4 @@ def mainLoop():
             pygame.display.flip()
             #wait for 2 seconds
             time.sleep(timeFormula)
-mainLoop()
+#mainLoop()
